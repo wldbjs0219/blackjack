@@ -1,24 +1,24 @@
 #include <stdio.h> 
-#include <stdio.h> 
 #include <stdlib.h>
+#include <time.h>
+#define N_CARDSET			1
+#define N_CARD				52
+#define N_DOLLAR			50
 
 
+#define N_MAX_CARDNUM		13
 #define N_MAX_USER			5
+#define N_MAX_CARDHOLD		10
 #define N_MAX_GO			17
 #define N_MAX_BET			5
 
+#define N_MIN_ENDCARD		30
 
 //betting
-void main()
+void bet_dollar()
 {
 	int input;
-	int dollar[N_MAX_USER]={50,50,50,50,50}; 
-	int n_user;
 	int i;
-
-	
-	printf("number(5):");
-	scanf("%d",&n_user);
 	
 	printf("bet your money(max:%d): ",dollar[0]);
 	scanf("%d",&input);
@@ -27,7 +27,4 @@ void main()
 	{
 		printf("player[%d]: %d",i,1+rand()%dollar[i]);
 	}
-	
 }
-
-

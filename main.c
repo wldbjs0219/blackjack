@@ -28,6 +28,14 @@ int cardSum[N_MAX_USER]	//sum of the cards
 int bet[N_MAX_USER];						//current betting 
 int gameEnd = 0; 							//game end flag
 
+//playing game functions -----------------------------
+
+//player settiing
+int configUser(void) {
+	
+	printf("input the number (max:5):");
+	scanf("%d",&n_user);	
+}
 
 //betting
 void bet_dollar()
@@ -47,6 +55,22 @@ void bet_dollar()
 	{
 		printf("player[%d]: %d",i,1+rand()%dollar[i]);
 	}
+}
+
+//offering initial 2 cards
+void offerCards(void) {
+	int i;
+	//1. give two card for each players
+	for (i=0;i<n_user;i++)
+	{
+		cardhold[i][0] = pullCard();
+		cardhold[i][1] = pullCard();
+	}
+	//2. give two card for the operator
+	cardhold[n_user][0] = pullCard();
+	cardhold[n_user][1] = pullCard();
+	
+	return;
 }
 
 
