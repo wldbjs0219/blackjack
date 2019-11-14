@@ -61,7 +61,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit2]
-FileName=main.c
+FileName=bet.c
 CompileCpp=0
 Folder=
 Compile=1

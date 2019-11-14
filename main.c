@@ -24,20 +24,15 @@ int n_user;  // number of players
 
 //play yard information
 int cardhold[N_MAX_USER+1][N_MAX_CARDHOLD];	//cards that currently the players hold 
-int cardSum[N_MAX_USER]	//sum of the cards
+int cardSum[N_MAX_USER];	//sum of the cards
 int bet[N_MAX_USER];						//current betting 
 int gameEnd = 0; 							//game end flag
 
-//playing game functions -----------------------------
 
-//player settiing
-int configUser(void) {
-	
-	printf("input the number (max:5):");
-	scanf("%d",&n_user);	
-}
+
 
 //betting
+/*
 void bet_dollar()
 {
 	int input;
@@ -56,6 +51,38 @@ void bet_dollar()
 		printf("player[%d]: %d",i,1+rand()%dollar[i]);
 	}
 }
+*/
+
+//card array controllers -------------------------------
+
+//mix the card sets and put in the array
+int mixCardTray(void) {
+
+}
+
+//get one card from the tray
+int pullCard(void) {
+	int i;
+	
+	for(i=0;i<2;i++)
+	{
+	 cardhold[0][i]=1+rand()%52;
+	 	
+	}
+	
+	
+}
+
+
+//playing game functions -----------------------------
+
+//player settiing
+int configUser(void) {
+	
+	printf("input the number (max:5):");
+	scanf("%d",&n_user);	
+}
+
 
 //offering initial 2 cards
 void offerCards(void) {
@@ -82,6 +109,5 @@ int main(void) {
 	printf("input the number of players(max 5): %d ", n_user);
 	n_user = getIntegerInput();
 	
-
 	return 0;
 }
