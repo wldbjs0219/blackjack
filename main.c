@@ -55,14 +55,7 @@ int getCardNum(int cardnum) {             				 //cardnum=input a number on a car
 	
 	if(cardnum==1 || cardnum==14 || cardnum==27 || cardnum==40)
 	{
-		if (cardsum<=21)
-		{
-			calnumber=11;
-		}
-		else if(cardsum>21)
-		{
-			calnumber=1;
-		}
+		calnumber=1;
 	}
 	
 	else if(cardnum >=2 && cardnum<=10)
@@ -192,7 +185,7 @@ void printCard(int cardnum) {
 }
 	
 //card array controllers -------------------------------
-
+/*
 //mix the card sets and put in the array
 int mixCardTray(void) {
 	int i;
@@ -216,7 +209,7 @@ int pullCard(void) {
 	
 	return card;
 }
-
+*/
 
 //playing game functions -----------------------------
 
@@ -224,9 +217,10 @@ int pullCard(void) {
 int configUser(void) {
 	
 	printf("input the number (max:5):");
-	scanf("%d",&n_user);	
+	scanf("%d",&n_user);
+	
 }
-
+/*
 //betting
 
 void bet_dollar()
@@ -248,7 +242,6 @@ void bet_dollar()
 	}
 }
 
-
 //offering initial 2 cards
 void offerCards(void) {
 	int i;
@@ -264,28 +257,29 @@ void offerCards(void) {
 	cardhold[n_user][1] = pullCard();
 	
 }
+*/
 
 //print initial card status
 void printCardInitialStatus(void) {
-	int i;
+	int i,j,k;
 	
-	printf("------server: ? , ")
+	printf("------server: ? , ");
 	{
 		printCard(cardhold[n_user][1]);
 	}
 	
-	printf("      -> you: ")
+	printf("      -> you: ");
 	for(i=0;i<2;i++);
 	{
-		printcard(cardhold[0][i]);
+		printCard(cardhold[0][i]);
 	}
 	
-	for(j=1;j<n_user<j++)
+	for(j=1;j<n_user;j++)
 	{
-		printf("      -> player %d: ",j)
+		printf("      -> player %d: ",j);
 		for(k=0;k<2;k++)
 		{
-			printcard(cardhold[j][k]);
+			printCard(cardhold[j][k]);
 		}	
 	}
 }
@@ -293,9 +287,10 @@ void printCardInitialStatus(void) {
 int getAction(void) {
 	
 	int num=2;
+	int input;
 	
 	printf("ACTION? ( 0 - go, others - stay )");
-	getIntegerInput()
+	getIntegerInput();
 		
 	if(input==0)
 	{

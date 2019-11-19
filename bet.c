@@ -17,6 +17,7 @@
 extern int bet[N_MAX_USER];
 extern int dollar[N_MAX_USER];
 extern int n_user;
+
 //betting
 void bet_dollar()
 {
