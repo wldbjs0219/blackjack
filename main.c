@@ -28,6 +28,8 @@ int cardSum[N_MAX_USER];						//sum of the cards
 int bet[N_MAX_USER];							//current betting 
 int gameEnd = 0; 								//game end flag
 
+int cardcnt=2;									// number received card
+
 //some utility functions
 
 //get an integer input from standard input (keyboard)
@@ -40,16 +42,55 @@ int getIntegerInput(void) {
     fflush(stdin);
     if (num != 1) 								//if it fails to get integer
         input = -1;
-    
+
     return input;
 }
 //card processing functions ---------------
 
+
 //calculate the actual card number in the blackjack game
-int getCardNum(int cardnum) {
+int getCardNum(int cardnum) {             				 //cardnum=input a number on a card 
 	
-	cardnum
+	int calnumber; 								 		//the number for calculation(ex. heart j=10)
 	
+	if(cardnum==1 || cardnum==14 || cardnum==27 || cardnum==40)
+	{
+		if (cardsum<=21)
+		{
+			calnumber=11;
+		}
+		else if(cardsum>21)
+		{
+			calnumber=1;
+		}
+	}
+	
+	else if(cardnum >=2 && cardnum<=10)
+	{
+		calnumber=cardnum;
+	}
+	
+	else if(cardnum >=15 && cardnum<=23)
+	{
+		calnumber=cardnum-13;
+	}
+	
+	else if(cardnum >=28 && cardnum<=36)
+	{
+		calnumber=cardnum-26;
+	}
+	
+	else if(cardnum >=41 && cardnum<=49)
+	{
+		calnumber=cardnum-39;
+	}
+	
+	else 
+	{
+		calnumber=10;
+	}
+
+	return calnumber;
 }
 
 //print the card information (e.g. DiaA)
@@ -73,86 +114,83 @@ void printCard(int cardnum) {
 		{
 			printf("heart Q ");
 		}
-		else if(cardnum==13)
+		else 
 		{
 			printf("heart K ");
 		}
 	} 
-	 
 	else if(cardnum>=14 && cardnum>=26)  //14~26: dia
 	{
-		if(cardnum==1)
+		if(cardnum==14)
 		{
 			printf("dia A ");
 		}
-		else if(cardnum>1 && cardnum <11)
+		else if(cardnum>14 && cardnum<24)
 		{
-			printf("dia %d ", cardnum);
+			printf("dia %d ", cardnum-13);
 		}
-		else if(cardnum==11)
+		else if(cardnum==24)
 		{
 			printf("dia J ");
 		}
-		else if(cardnum==12)
+		else if(cardnum==25)
 		{
 			printf("dia Q ");
 		}
-		else if(cardnum==13)
+		else
 		{
 			printf("dia K ");
 		}
 	}
-		else if(cardnum>=27 && cardnum>39)  //27~39: spade
+	else if(cardnum>=27 && cardnum>=39)  //27~39: spade
 	{
-		if(cardnum==1)
+		if(cardnum==27)
 		{
-			printf("heart A ");
+			printf("spade A ");
 		}
-		else if(cardnum>1 && cardnum <11)
+		else if(cardnum>27 && cardnum <37)
 		{
-			printf("heart %d ", cardnum);
+			printf("spade %d ", cardnum-26);
 		}
-		else if(cardnum==11)
+		else if(cardnum==37)
 		{
-			printf("heart J ");
+			printf("spade J ");
 		}
-		else if(cardnum==12)
+		else if(cardnum==38)
 		{
-			printf("heart Q ");
+			printf("spade Q ");
 		}
-		else if(cardnum==13)
+		else
 		{
-			printf("heart K ");
+			printf("spade K ");
 		}
 	}
 	else if(cardnum>=40 && cardnum>=52)  //40~52 : club
 	{
-		if(cardnum==1)
+		if(cardnum==40)
 		{
-			printf("heart A ");
+			printf("club A ");
 		}
-		else if(cardnum>1 && cardnum <11)
+		else if(cardnum>40 && cardnum <50)
 		{
-			printf("heart %d ", cardnum);
+			printf("club %d ", cardnum-39);
 		}
-		else if(cardnum==11)
+		else if(cardnum==50)
 		{
-			printf("heart J ");
+			printf("club J ");
 		}
-		else if(cardnum==12)
+		else if(cardnum==51)
 		{
-			printf("heart Q ");
+			printf("club Q ");
 		}
-		else if(cardnum==13)
+		else
 		{
-			printf("heart K ");
+			printf("club K ");
 		}
 	}
 	 
 }
 	
-
-
 //card array controllers -------------------------------
 
 //mix the card sets and put in the array
@@ -176,7 +214,7 @@ int pullCard(void) {
 	card=CardTray[i];
 	i++;
 	
-	return card
+	return card;
 }
 
 
@@ -219,25 +257,53 @@ void offerCards(void) {
 	{
 		cardhold[i][0] = pullCard();
 		cardhold[i][1] = pullCard();
+		
 	}
 	//2. give two card for the operator
 	cardhold[n_user][0] = pullCard();
 	cardhold[n_user][1] = pullCard();
 	
-	return;
 }
 
 //print initial card status
 void printCardInitialStatus(void) {
+	int i;
 	
+	printf("------server: ? , ")
+	{
+		printCard(cardhold[n_user][1]);
+	}
+	
+	printf("      -> you: ")
+	for(i=0;i<2;i++);
+	{
+		printcard(cardhold[0][i]);
+	}
+	
+	for(j=1;j<n_user<j++)
+	{
+		printf("      -> player %d: ",j)
+		for(k=0;k<2;k++)
+		{
+			printcard(cardhold[j][k]);
+		}	
+	}
 }
 
 int getAction(void) {
 	
+	int num=2;
+	
+	printf("ACTION? ( 0 - go, others - stay )");
+	getIntegerInput()
+		
+	if(input==0)
+	{
+		cardhold[0][num]= pullCard();
+	}
 }
 
-
-void printUserCardStatus(int user, int cardcnt) {  //cardcnt=Ä«µå¹Ş´ÂÈ½  
+void printUserCardStatus(int user, int cardcnt) {    //cardcnt=Ä«µå¹Ş´ÂÈ½  
 	int i;
 	
 	printf("   -> card : ");
