@@ -15,7 +15,7 @@
 #define N_MIN_ENDCARD		30
 
 //card tray object
-int CardTray[N_CARDSET*N_CARD]={1,2,3,4,5,6,7,8,9,10,10,10,10,1,2,3,4,5,6,7,8,9,10,10,10,10,1,2,3,4,5,6,7,8,9,10,10,10,10,1,2,3,4,5,6,7,8,9,10,10,10,10};
+int CardTray[N_CARDSET*N_CARD];
 int cardIndex = 0;							
 
 //player info
@@ -55,22 +55,31 @@ void bet_dollar()
 
 //card array controllers -------------------------------
 
+
 //mix the card sets and put in the array
 int mixCardTray(void) {
+	
+	srand((unsigned)time(NULL));
+	
+	for(i=0;i<52;i++)
+	{
+	 	CardTray[i]=rand()%52 +1;
+	}
+	
+	
+	
 
 }
 
 //get one card from the tray
 int pullCard(void) {
-	int i;
+	int i=0;
+	int card=0;   
 	
-	for(i=0;i<2;i++)
-	{
-	 cardhold[0][i]=1+rand()%52;
-	 	
-	}
+	card=CardTray[i];
+	i++;
 	
-	
+	return card
 }
 
 
@@ -104,10 +113,3 @@ void offerCards(void) {
 
 
 
-int main(void) {
-	
-	printf("input the number of players(max 5): %d ", n_user);
-	n_user = getIntegerInput();
-	
-	return 0;
-}
