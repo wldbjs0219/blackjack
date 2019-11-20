@@ -7,8 +7,9 @@
 #define N_MAX_USER			5
 #define N_MAX_CARDHOLD		10
 
-
-extern int CardTray[N_CARDSET*N_CARD];						
+//card tray object
+extern int CardTray[N_CARDSET*N_CARD];
+extern int cardIndex = 0;						
 					
 extern int n_user;  // number of players
 
@@ -33,13 +34,8 @@ int mixCardTray(void) {
 
 //get one card from the tray
 int pullCard(void) {
-	int i=0;
-	int card=0;   
-	
-	card=CardTray[i];
-	i++;
-	
-	return card;
+
+	return cardTray[cardIndex ++];
 }
 
 //offering initial 2 cards
