@@ -26,9 +26,11 @@ void bet_dollar()
 	
 	printf("bet your money(max:%d): ",dollar[0]);
 	scanf("%d",&input);
+	bet[0]= input
 		
 	for(i=1;i<n_user;i++);
 	{
-		printf("player[%d]: %d",i,1+rand()%dollar[i]);
+		bet[i]=1+rand()%dollar[i]
+		printf("player[%d]: %d",i,bet[i]);
 	}
 }

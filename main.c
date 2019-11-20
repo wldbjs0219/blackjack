@@ -24,7 +24,7 @@ int n_user;  // number of players
 
 //play yard information
 int cardhold[N_MAX_USER+1][N_MAX_CARDHOLD];		//cards that currently the players hold 
-int cardSum[N_MAX_USER];						//sum of the cards
+int cardSum[N_MAX_USER]=[0,0,0,0,0];			//sum of the cards
 int bet[N_MAX_USER];							//current betting 
 int gameEnd = 0; 								//game end flag
 
@@ -58,24 +58,9 @@ int getCardNum(int cardnum) {             				 //cardnum=input a number on a car
 		calnumber=1;
 	}
 	
-	else if(cardnum >=2 && cardnum<=10)
+	else if(cardnum >=2 && cardnum<=10 || cardnum >=15 && cardnum<=23 || cardnum >=28 && cardnum<=36 || cardnum >=41 && cardnum<=49)
 	{
-		calnumber=cardnum;
-	}
-	
-	else if(cardnum >=15 && cardnum<=23)
-	{
-		calnumber=cardnum-13;
-	}
-	
-	else if(cardnum >=28 && cardnum<=36)
-	{
-		calnumber=cardnum-26;
-	}
-	
-	else if(cardnum >=41 && cardnum<=49)
-	{
-		calnumber=cardnum-39;
+		calnumber=cardnum % 13 ;
 	}
 	
 	else 
@@ -298,7 +283,7 @@ int getAction(void) {
 	}
 }
 
-void printUserCardStatus(int user, int cardcnt) {    //cardcnt=Ä«µå¹Þ´ÂÈ½  
+void printUserCardStatus(int user) {    //cardcnt=the number of getting a card 
 	int i;
 	
 	printf("   -> card : ");
@@ -308,10 +293,29 @@ void printUserCardStatus(int user, int cardcnt) {    //cardcnt=Ä«µå¹Þ´ÂÈ½
 }
 
 
-
-
 // calculate the card sum and see if : 1. under 21, 2. over 21, 3. blackjack
-int calcStepResult() {
+int calcStepResult(int playernum) {  		// playernum: you-0, player-1~, dealer- n_user
+	
+	for(i=0;i<cardnct;i++)
+	{
+		cardSum[playernum] += cardhold[playernum][j];
+	}
+	
+	if(cardSum <=21)
+	{
+		if(cardSum =21)
+		{
+			dollar[playernum]+=bet[playernum];
+			printf("        :::blackjack!! win!! --> + %d (%d)",bet[playernum],dollar[playernum]);
+		}
+		else if(cardSum < 21)
+		{
+			printf("sum is %d",)
+		}
+	
+	}
+
+	
 	
 }
 
