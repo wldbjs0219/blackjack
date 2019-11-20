@@ -283,7 +283,7 @@ int getAction(void) {
 	}
 }
 
-void printUserCardStatus(int user) {    //cardcnt=the number of getting a card 
+void printUserCardStatus(int user) {    			//cardcnt=the number of getting a card 
 	int i;
 	
 	printf("   -> card : ");
@@ -294,16 +294,25 @@ void printUserCardStatus(int user) {    //cardcnt=the number of getting a card
 
 
 // calculate the card sum and see if : 1. under 21, 2. over 21, 3. blackjack
-int calcStepResult(int playernum) {  		// playernum: you-0, player-1~, dealer- n_user
+int calcStepResult(int playernum) {  
+
+}
 	
-	for(i=0;i<cardnct;i++)
+
+
+
+int checkResult(int playernum) {                  // playernum: you-0, player-1~, dealer- n_user
+	
+	int i
+	
+	for(i=0;i<cardcnt;i++)
 	{
 		cardSum[playernum] += cardhold[playernum][j];
 	}
 	
 	if(cardSum <=21)
 	{
-		if(cardSum =21)
+		if(cardSum = 21)
 		{
 			dollar[playernum]+=bet[playernum];
 			printf("        :::blackjack!! win!! --> + %d (%d)",bet[playernum],dollar[playernum]);
@@ -313,17 +322,12 @@ int calcStepResult(int playernum) {  		// playernum: you-0, player-1~, dealer- n
 			printf("sum is %d",)
 		}
 	
-	}
-
-	
-	
-}
-
-int checkResult() {
-	
+	}	
 }
 
 int checkWinner() {
+	
+	printf("     ->your result: ")
 	
 }
 
