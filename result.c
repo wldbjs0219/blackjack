@@ -27,8 +27,9 @@ int calcStepResult(int user) {
 	return cardSum[user];
 }
 
-int checkResult(int user) { 
-	
+int checkResult(int user) {
+
+	int i;
 	printf("------- ROUND %d RESULT -------",roundindex);
 	
 	//your result
@@ -53,6 +54,7 @@ int checkResult(int user) {
 		{
 			printf("--> your result: lose! due to overflow --> dollar(%d)\n",dollar[0]);
 		}
+	}
 		
 	//players result
 	for(i=1;i<n_user;i++)
@@ -60,7 +62,7 @@ int checkResult(int user) {
 	//case: win
 		if(cardSum[i]<=21)
 		{
-			if(cardSumi0]==21)
+			if(cardSum[0]==21)
 			{
 				printf("--> %dth Player result: win! due to Blackjack --> dollar(%d)\n",i,dollar[i]);
 			}
@@ -73,15 +75,49 @@ int checkResult(int user) {
 			else if (cardSum[0]<21 && cardSum[0]<cardSum[n_user])
 			{
 				printf(" --> %dth Player result: lose! sum(%d) --> dollar(%d)\n",i,cardSum[i],dollar[i]);
+				if(dollar[i]=0)
+				{
+					printf("--> %dth plyer is bankrupted!! game will be ended")
+					gameEnd=1;
+				}
 			}	
 			else
 			{
 				printf("--> %dth Player result: lose! due to overflow --> dollar(%d)\n",i,dollar[i]);
+				if(dollar[i]=0)
+				{
+					printf("--> %dth plyer is bankrupted!! game will be ended")
+					gameEnd=1;
+				}
 			}
-	               
+		}
+	}
 }
 
 int checkWinner() {
-
+	int i;
+	int max=dollar[0];
 	
+	printf("game end! your money: %d dollar, ",dollar[0])
+	printf(" players's money: ");
+	for(i=1;i<n_user<i++)
+	{
+		printf("%d dollar  ",dollar[i]);
+		if(max<dollar[i])
+		{
+			max=dollar[i];
+		}
+	}
+	
+	if(max==dollar[0])
+	{
+		printf("\n\n winer is you!\n");
+	}
+	else if
+	{
+		printf("\n\n winer is %dth player!\n",i);
+	}
+	
+	return max;
 }
+	

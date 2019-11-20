@@ -19,7 +19,7 @@ extern int dollar[N_MAX_USER];
 extern int n_user;
 
 //betting
-void bet_dollar()
+void bet_dollar(void)
 {
 	int input;
 	int i;

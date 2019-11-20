@@ -10,3 +10,18 @@
 #define N_MAX_BET			5
 
 #define N_MIN_ENDCARD		30
+
+int getIntegerInput(void);
+int configUser(void);
+void printCardInitialStatus(void);
+int getAction(void);
+void printUserCardStatus(int user);
+int getCardNum(int cardnum);
+void printCard(int cardnum);
+int mixCardTray(void);
+int pullCard(void);
+void offerCards(void);
+void bet_dollar;
+int calcStepResult(int playernum);
+int checkResult();
+int checkWinner();

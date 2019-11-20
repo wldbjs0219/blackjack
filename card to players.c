@@ -35,7 +35,7 @@ int mixCardTray(void) {
 //get one card from the tray
 int pullCard(void) {
 
-	return cardTray[cardIndex ++];
+	return CardTray[cardIndex ++];
 }
 
 //offering initial 2 cards
