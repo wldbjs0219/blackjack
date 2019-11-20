@@ -8,7 +8,7 @@ int getCardNum(int cardnum) {             				 //cardnum=input a number on a car
 	
 	if(cardnum==1 || cardnum==14 || cardnum==27 || cardnum==40)
 	{
-		calnumber=1;
+		calnumber=1 ||;
 	}
 	
 	else if(cardnum >=2 && cardnum<=10 || cardnum >=15 && cardnum<=23 || cardnum >=28 && cardnum<=36 || cardnum >=41 && cardnum<=49)
