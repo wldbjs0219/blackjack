@@ -6,17 +6,12 @@ int getCardNum(int cardnum) {             				 //cardnum=input a number on a car
 	
 	int calnumber; 								 		//the number for calculation(ex. heart j=10)
 	
-	if(cardnum==1 || cardnum==14 || cardnum==27 || cardnum==40)
+	if(cardnum >=2 && cardnum<=10 || cardnum >=15 && cardnum<=23 || cardnum >=28 && cardnum<=36 || cardnum >=41 && cardnum<=49)
 	{
-		calnumber=1 ||;
+		calnumber=cardnum % 13;
 	}
 	
-	else if(cardnum >=2 && cardnum<=10 || cardnum >=15 && cardnum<=23 || cardnum >=28 && cardnum<=36 || cardnum >=41 && cardnum<=49)
-	{
-		calnumber=cardnum % 13 ;
-	}
-	
-	else 
+	else if(cardnum>=11 && cardnum<=13 || cardnum>=24 && cardnum<=26 || cardnum>=37 && cardnum<=39 || cardnum>=50 && cardnum< =52 )
 	{
 		calnumber=10;
 	}

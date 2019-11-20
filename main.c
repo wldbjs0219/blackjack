@@ -33,8 +33,7 @@ int cardhold[N_MAX_USER+1][N_MAX_CARDHOLD];		//cards that currently the players 
 int cardSum[N_MAX_USER]={0,0,0,0,0};			//sum of the cards
 int bet[N_MAX_USER];							//current betting 
 int gameEnd = 0; 								//game end flag
-
-int cardcnt=2;									// number received card
+int cardcnt[N_MAX_USER]={2,2,2,2,2};			// number received card 
 
 //some utility functions
 
@@ -283,7 +282,7 @@ int getAction(void) {
 	
 	int input;
 	
-	printf("ACTION? ( 0 - go, others - stay )");
+	printf("ACTION? ( 0 - go, others - stop )");
 	input= getIntegerInput();
 		
 	while(input==0)
@@ -298,7 +297,7 @@ void printUserCardStatus(int user) {
 	int i;
 	
 	printf("   -> card : ");
-	for (i=0;i<cardcnt;i++)
+	for (i=0;i<cardcnt[j];i++)
 		printCard(cardhold[user][i]);
 	printf("\t ::: ");
 }
@@ -311,7 +310,7 @@ int calcStepResult(int playernum) {
 }
 
 
-int checkResult(int playernum) {                  // playernum: you-0, player-1~, dealer- n_user
+int checkResult(int user) {                  
 }
 
 int checkWinner() {
@@ -324,6 +323,7 @@ int checkWinner() {
 int main(int argc, char *argv[]) {
 	int roundIndex = 0;
 	int max_user;
+	int i=2;
 	int j;
 	
 	
@@ -354,37 +354,97 @@ int main(int argc, char *argv[]) {
 		//each player's turn
 		
 		//my turn
-		printf(">>> my turn!-------");
-		
-		while()
+		printf(">>> my turn!-------\n");
+		do   
 		{	
-			printUserCardStatus(j);
-			calcStepResult(j);
-			if(cardSum[0]>=21)
+			printUserCardStatus(0);   //print current card status printUserCardStatus();
+			calcStepResult();       //check the card status ::: calcStepResult()
+			
+			if(cardSum[0]<21)
 			{
-				if(cardSum[0]=21)
-				{
-					printf("Blackjack!! you win! (sum: %d)",dollar[0]=ber[0]);
-				}
+				getAction();
 			}
-			getaction();
-			
-		
-			
-		}
 
-		if(cardsum[0]<21)
-		for (j=0;j<n_user;j++) //each player
-		{
-			while () 							//do until the player dies or player says stop
+			else if(cardSum[0]>21)
 			{
-				printUserCardStatus(j);			//print current card status printUserCardStatus();
-				calcStepResult(j);				//check the card status ::: calcStepResult()
-				//GO? STOP? ::: getAction()
-				//check if the turn ends or not
+				printf("   ::: Dead (sum: )\n",cardSum[0]);
+				break;
 			}
+			else 
+			{
+				printf("Blackjack!! you win! --> get: %d (dollar: %d)\n",2*bet[0],dollar[0]+(2*bet[0]));
+				break;
+			}
+		}while(cardSum[0]<21 || input!=0); 	//do until the player dies or player says stop
+		
+		//computer players turns
+		for (j=1;j<n_user;j++) 						//each player
+		{
+			printf(">>> Player %d turn!-------\n",j);
+			do{	
+				printUserCardStatus(j);   //print current card status printUserCardStatus();
+				calcStepResult(j);       //check the card status ::: calcStepResult()
+			
+				if(cardSum[j]<17)
+				{	
+					printf("GO!\n");
+					cardhold[j][i]=pullCard();
+					i++;
+				}
+				else if(cardSum[j]>=17)
+				{
+					if(cardSum[j]>=17 && cardSum[j]<=20)
+					{
+						printf("STOP!\n");
+						break;
+					}
+					else if(cardSum[j]>21)
+					{
+						printf("   ::: Dead (sum: %d)\n",cardSum[j]);
+						break;
+					}
+					else 
+					{
+						printf("Blackjack!!  --> get: %d (dollar: %d)\n",2*bet[j],dollar[j]+(2*bet[j]));
+						break;
+					}
+				}
+			}while(cardSum[j]<17);
 		}
-		  
+		
+		//dealer turn
+		printf(">>> Dealer turn!-------\n");
+		do
+		{	
+			printUserCardStatus(n_user);   //print current card status printUserCardStatus();
+			calcStepResult(n_user);       //check the card status ::: calcStepResult()
+			
+				if(cardSum[n_user]<17)
+				{	
+					printf("GO!\n");
+					cardhold[n_user][i]=pullCard();
+					i++;
+				}
+				else if(cardSum[j]>=17)
+				{
+					if(cardSum[j]>=17 && cardSum[j]<=20)
+					{
+						printf("STOP!\n");
+						break;
+					}
+					else if(cardSum[j]>21)
+					{
+						printf("   ::: Dead (sum: %d)\n",cardSum[n_user]);
+						break;
+					}
+					else 
+					{
+						printf("Blackjack!!\n");
+						break;
+					}
+				}
+			}while(cardSum[n_user]<17);
+		
 		//result
 		checkResult();
 		roudindex++;
