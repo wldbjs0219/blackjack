@@ -94,7 +94,7 @@ int checkResult(int user) {
 	}
 }
 
-int checkWinner() {
+int checkWinner(void) {
 	int i;
 	int max=dollar[0];
 	

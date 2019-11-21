@@ -3,6 +3,8 @@
 #include <time.h>
 #include "function.h"
 
+
+
 #define N_CARDSET			1
 #define N_CARD				52
 #define N_DOLLAR			50
@@ -254,6 +256,7 @@ void offerCards(void) {
 */
 
 //print initial card status
+/*
 void printCardInitialStatus(void) {
 	int i,j,k;
 	
@@ -277,7 +280,8 @@ void printCardInitialStatus(void) {
 		}	
 	}
 }
-
+*/
+/*
 int getAction(int user)
 {
 	int input;
@@ -321,6 +325,7 @@ void printUserCardStatus(int user) {
 		printCard(cardhold[user][i]);
 	printf("\t ::: ");
 }
+*/
 
 /*
 // calculate the card sum and see if : 1. under 21, 2. over 21, 3. blackjack
@@ -363,7 +368,7 @@ int main(int argc, char *argv[]) {
 
 
 	//Game start --------
-	do {
+	do {     				//round replay
 		printf("\n --------------------\n-----------------Round %d (cardIndex: %d)-----------------\n--------------------",roundIndex,cardIndex);
 		
 		//betting
@@ -382,7 +387,7 @@ int main(int argc, char *argv[]) {
 		//my turn
 		printf(">>> my turn!-------\n");
 		do   
-		{	printUserCardStatus(0);   //print current card status printUserCardStatus();
+		{	printUserCardStatus(0);  //print current card status printUserCardStatus();
 			calcStepResult(0);       //check the card status ::: calcStepResult()
 			
 			if(cardSum[0]<21)

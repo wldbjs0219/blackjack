@@ -1,6 +1,8 @@
 #include <stdio.h> 
 #include <stdlib.h>
 #include <time.h>
+#include "function.h"
+
 #define N_CARDSET			1
 #define N_CARD				52
 #define N_DOLLAR			50
@@ -15,6 +17,8 @@ extern int n_user;  // number of players
 
 //play yard information
 extern int cardhold[N_MAX_USER+1][N_MAX_CARDHOLD];		//cards that currently the players hold 
+
+extern int cardcnt[N_MAX_USER]={2,2,2,2,2};
 
 
 //card array controllers -------------------------------
@@ -52,6 +56,39 @@ void offerCards(void) {
 	cardhold[n_user][0] = pullCard();
 	cardhold[n_user][1] = pullCard();
 	
+}
+
+void printCardInitialStatus(void) {
+	int i,j,k;
+	
+	printf("------server: ? , ");
+	{
+		printCard(cardhold[n_user][1]);
+	}
+	
+	printf("      -> you: ");
+	for(i=0;i<2;i++);
+	{
+		printCard(cardhold[0][i]);
+	}
+	
+	for(j=1;j<n_user;j++)
+	{
+		printf("      -> player %d: ",j);
+		for(k=0;k<2;k++)
+		{
+			printCard(cardhold[j][k]);
+		}	
+	}
+}
+
+void printUserCardStatus(int user) {    			
+	int i;
+	
+	printf("   -> card : ");
+	for (i=0;i<cardcnt[user];i++)
+		printCard(cardhold[user][i]);
+	printf("\t ::: ");
 }
 
 

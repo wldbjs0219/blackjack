@@ -34,3 +34,42 @@ void bet_dollar(void)
 		printf("player[%d]: %d",i,bet[i]);
 	}
 }
+
+int getAction(int user)
+{
+	int input;
+	switch(user)
+	{
+		case 0:
+			printf("ACTION? ( 0 - go, others - stop )");
+			input= getIntegerInput();
+			while(input==0)
+			{
+				cardhold[0][cardcnt[0]]= pullCard();
+				cardcnt[0]++;
+			}
+			break;
+			
+		case 1:
+		case 2:
+		case 3:
+		case 4:
+		case 5:
+		 if(cardSum[user]<17)
+		 {
+		 	printf("GO!");
+		 	cardhold[user][cardcnt[user]]= pullCard();
+		 	cardcnt[user]++;
+		 	
+		 }
+		 else if (cardSum[user]>=17)
+		 {
+		 	printf("Stay!");
+		 }
+		 break;
+	}
+}
+
+
+
+

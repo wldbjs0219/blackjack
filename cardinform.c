@@ -114,5 +114,5 @@ void printCard(int cardnum) {
 			printf("club K ");
 		}
 	}
-	 
 }
+
