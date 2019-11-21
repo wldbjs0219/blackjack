@@ -82,44 +82,20 @@ void bet_dollar(void)
 	for(i=1;i<n_user;i++);
 	{
 		bet[i]=1+rand()%dollar[i];
-		printf("player[%d]: %d",i,bet[i]);
+		printf("      player[%d]: %d\n",i,bet[i]);
 	}
 }
 
 //go stop
-int getAction(int user)
+int getAction(void)
 {
 	int input;
-	
-	switch(user)
+	printf("     ::ACTION? ( 0 - go, others - stop ) : ");
+	input=getIntegerInput();
+	while(input==0)
 	{
-		case 0:
-			printf("   :::ACTION? ( 0 - go, others - stop ) : ");
-			input= getIntegerInput();
-			while(input=='0')
-			{
-				cardhold[0][cardcnt[0]]= pullCard();
-				cardcnt[0]++;
-			}
-			break;
-			
-		case 1:
-		case 2:
-		case 3:
-		case 4:
-		case 5:
-		 if(cardSum[user]<17)
-		 {
-		 	printf("GO!");
-		 	cardhold[user][cardcnt[user]]= pullCard();
-		 	cardcnt[user]++;
-		 	
-		 }
-		 else if (cardSum[user]>=17)
-		 {
-		 	printf("Stay!");
-		 }
-		 break;
+		cardhold[0][cardcnt[0]]= pullCard();
+		cardcnt[0]++;
 	}
 }
 
@@ -241,6 +217,7 @@ int main(int argc, char *argv[]) {
 	int i=2;
 	int j;
 	int input;
+	int per;
 	
 	
 	srand((unsigned)time(NULL));
@@ -251,6 +228,10 @@ int main(int argc, char *argv[]) {
 
 	//Game initialization --------
 	//1. players' dollar
+	for(per=0; per<=n_user ; per++)
+	{
+		dollar[per]=50;
+	}
 	//2. card tray
 	
 	mixCardTray();
@@ -261,7 +242,7 @@ int main(int argc, char *argv[]) {
 		printf("\n --------------------\n-----------------Round %d (cardIndex: %d)-----------------\n--------------------",roundIndex,cardIndex);
 		
 		//betting
-		printf("BETTING STEP--------------------\n"); 
+		printf("\n--------------------BETTING STEP--------------------\n"); 
 		bet_dollar();
 		printf("--------------------\n");
 		
@@ -306,20 +287,31 @@ int main(int argc, char *argv[]) {
 				printUserCardStatus(j);   //print current card status printUserCardStatus();
 				calcStepResult(j);       //check the card status ::: calcStepResult()
 			
-				if(cardSum[j]>=0 && cardSum[j]<=20)
-				{	
-					getAction(j);
-				}
-				else if(cardSum[j]>21)
+				if(cardSum[j]>17)
 				{
-					dollar[j] -= bet[j];
-					printf("Dead (sum: %d) --> lose: -%d (dollar: &d)\n ",cardSum[j],bet[j],dollar[j]);
+					if(cardSum[j]>17 && cardSum[j]<21)
+					{
+						printf("STAY!!\n");
+					}
+					else if(cardSum[j]>21)
+					{
+						dollar[j] -= bet[j];
+						printf("Dead (sum: %d) --> lose: -%d (dollar: &d)\n ",cardSum[j],bet[j],dollar[j]);
+					}
+				}
+				else if(cardSum[j]<17)
+				{	
+					printf("GO!");
+					cardhold[j][cardcnt[j]]= pullCard();
+					cardcnt[j]++;	
 				}
 				else 
 				{
 					dollar[j] += (2*bet[j]);
 					printf("Blackjack!!  --> get: +%d (dollar: %d)\n",2*bet[j],dollar[j]);
 				}
+
+
 			}while(cardSum[j]<17);
 		}
 		

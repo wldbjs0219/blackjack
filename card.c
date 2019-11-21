@@ -15,8 +15,8 @@
 
 //card tray object
 extern int CardTray[N_CARDSET*N_CARD];
-extern int cardIndex;						
-					
+extern int cardIndex;
+											
 extern int n_user;  // number of players
 
 //play yard information
@@ -27,7 +27,7 @@ extern  int cardcnt[N_MAX_USER];
 //print the card information (e.g. DiaA)
 void printCard(int cardnum) {
 
-	if(cardnum>=1 && cardnum>=13)  // 1~13: heart
+	if(cardnum>=1 && cardnum<=13)  // 1~13: heart
 	{
 		if(cardnum==1)
 		{
@@ -58,7 +58,7 @@ void printCard(int cardnum) {
 		}
 		else if(cardnum>14 && cardnum<24)
 		{
-			printf("dia %d ", cardnum-13);
+			printf("dia %d ", cardnum%13);
 		}
 		else if(cardnum==24)
 		{
@@ -73,7 +73,7 @@ void printCard(int cardnum) {
 			printf("dia K ");
 		}
 	}
-	else if(cardnum>=27 && cardnum>=39)  //27~39: spade
+	else if(cardnum>=27 && cardnum<=39)  //27~39: spade
 	{
 		if(cardnum==27)
 		{
@@ -96,7 +96,7 @@ void printCard(int cardnum) {
 			printf("spade K ");
 		}
 	}
-	else if(cardnum>=40 && cardnum>=52)  //40~52 : club
+	else if(cardnum>=40 && cardnum<=52)  //40~52 : club
 	{
 		if(cardnum==40)
 		{
@@ -152,14 +152,13 @@ void mixCardTray(void) {
 
 	int i;
 	int shuffle=52;  //suffle: the numer of shuffle
-	int randNum1,randNum2;      
+	int randNum;      
     
     srand((unsigned)time(NULL));
 	for(i=0; i<shuffle; i++) 
 	{
-		randNum1=1+rand()%52;
-		randNum2=1+rand()%52;
-		swap(&CardTray[randNum1], &CardTray[randNum2]);	
+		randNum=1+rand()%52;
+		swap(&CardTray[i], &CardTray[randNum]);	
 	}
 }
 
@@ -191,11 +190,11 @@ void offerCards(void) {
 void printCardInitialStatus(void) {
 	int i,j,k;
 	
-	printf("------server: ? , \n");
+	printf("------server: ? , ");
 	printCard(cardhold[n_user][1]);
 
 	
-	printf("      -> you: \n");
+	printf("      -> you: ");
 	for(i=0;i<2;i++);
 	{
 		printCard(cardhold[0][i]);
@@ -203,7 +202,7 @@ void printCardInitialStatus(void) {
 	
 	for(j=1;j<n_user;j++)
 	{
-		printf("      -> player %d: \n");
+		printf("      -> player %d:");
 		for(k=0;k<2;k++)
 		{
 			printCard(cardhold[j][k]);
