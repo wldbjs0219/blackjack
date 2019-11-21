@@ -18,7 +18,6 @@ int CardTray[N_CARDSET*N_CARD]={1,2,3,4,5,6,7,8,9,10,11,12,13,
 14,15,16,17,18,19,20,21,22,23,24,25,26,
 27,28,29,30,31,32,33,34,35,36,37,38,39,
 40,41,42,43,44,45,46,47,48,49,50,51,52};
-
 int cardIndex = 0;							
 
 //player info
@@ -44,6 +43,32 @@ void offerCards(void);
 void printCardInitialStatus(void);
 void printUserCardStatus(int user);
 
+//get number of player
+int configUser(void) {
+	
+	do
+	{
+		printf("input the number (max:5):");
+		scanf("%d",&n_user);
+	}
+	while(n_user < 1 || n_user > 5);
+		
+}
+
+//get an integer input from standard input (keyboard)
+//return : input integer value
+//         (-1 is returned if keyboard input was not integer)
+int getIntegerInput(void) {
+    int input, num;
+    
+    num = scanf("%d", &input);
+    fflush(stdin);
+    if (num != 1) 								//if it fails to get integer
+        input = -1;
+
+    return input;
+}
+
 //betting
 void bet_dollar(void)
 {
@@ -61,29 +86,17 @@ void bet_dollar(void)
 	}
 }
 
-//get an integer input from standard input (keyboard)
-//return : input integer value
-//         (-1 is returned if keyboard input was not integer)
-int getIntegerInput(void) {
-    int input, num;
-    
-    num = scanf("%d", &input);
-    fflush(stdin);
-    if (num != 1) 								//if it fails to get integer
-        input = -1;
-
-    return input;
-}
-
+//go stop
 int getAction(int user)
 {
 	int input;
+	
 	switch(user)
 	{
 		case 0:
-			printf("ACTION? ( 0 - go, others - stop ) : ");
+			printf("   :::ACTION? ( 0 - go, others - stop ) : ");
 			input= getIntegerInput();
-			while(input==0)
+			while(input=='0')
 			{
 				cardhold[0][cardcnt[0]]= pullCard();
 				cardcnt[0]++;
@@ -108,17 +121,6 @@ int getAction(int user)
 		 }
 		 break;
 	}
-}
-
-int configUser(void) {
-	
-	do
-	{
-		printf("input the number (max:5):");
-		scanf("%d",&n_user);
-	}
-	while(n_user < 1 || n_user > 5);
-		
 }
 
 // calculate the card sum and see if : 1. under 21, 2. over 21, 3. blackjack
@@ -244,12 +246,13 @@ int main(int argc, char *argv[]) {
 	srand((unsigned)time(NULL));
 	
 	//set the number of players
-	configUser();   //scanf 가 아닌 교수님이 주신걸로? 
+	configUser();   
 
 
 	//Game initialization --------
 	//1. players' dollar
 	//2. card tray
+	
 	mixCardTray();
 	printf("card is mixed and put into the tray \n");
 
@@ -258,7 +261,7 @@ int main(int argc, char *argv[]) {
 		printf("\n --------------------\n-----------------Round %d (cardIndex: %d)-----------------\n--------------------",roundIndex,cardIndex);
 		
 		//betting
-		printf("BETTING STEP------\n"); 
+		printf("BETTING STEP--------------------\n"); 
 		bet_dollar();
 		printf("--------------------\n");
 		

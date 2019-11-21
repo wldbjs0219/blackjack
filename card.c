@@ -121,10 +121,10 @@ void printCard(int cardnum) {
 	}
 }
 
-//calculate the actual card number in the blackjack game
-int getCardNum(int cardnum) {             				 //cardnum=input a number on a card 
+
+int getCardNum(int cardnum) {             				
 	
-	int calnumber; 								 		//the number for calculation(ex. heart j=10)
+	int calnumber; 								 	
 	
 	if(cardnum >=2 && cardnum<=10 || cardnum >=15 && cardnum<=23 || cardnum >=28 && cardnum<=36 || cardnum >=41 && cardnum<=49)
 	{
@@ -141,37 +141,25 @@ int getCardNum(int cardnum) {             				 //cardnum=input a number on a car
 
 void swap(int *a, int *b)
 {
-	int i;
-	int suffle=52;             						// trial of suffle
-	int randNum1,randNum2;
-	int temp;        
-
-	for(i=0; i<suffle; i++) 
-	{
-		randNum1 = 1+rand()%52; 
-		randNum2 = 1+rand()%52;
-		
-		temp = CardTray[randNum1];
-		CardTray[randNum1] = CardTray[randNum2];
-		CardTray[randNum2] = temp;
-	}
+	int temp;
+	
+	temp=*a;
+	*a=*b;
+	*b=temp;
 }
 
-void mixCardTray(void) {
+void mixCardTray(void) {   
 
-	int i,j; 
-	int suffle=52;  
-	int randNum1,randNum2;
-	int temp;        
-       
-	for(i=0; i<suffle; i++) 
+	int i;
+	int shuffle=52;  //suffle: the numer of shuffle
+	int randNum1,randNum2;      
+    
+    srand((unsigned)time(NULL));
+	for(i=0; i<shuffle; i++) 
 	{
-		randNum1 = 1+rand()%52; 
-		randNum2 = 1+rand()%52;
-		
-		temp = CardTray[randNum1];
-		CardTray[randNum1] = CardTray[randNum2];
-		CardTray[randNum2] = temp;
+		randNum1=1+rand()%52;
+		randNum2=1+rand()%52;
+		swap(&CardTray[randNum1], &CardTray[randNum2]);	
 	}
 }
 
@@ -181,7 +169,8 @@ void mixCardTray(void) {
 //get one card from the tray
 int pullCard(void) {
 
-	return CardTray[cardIndex ++];
+	cardIndex++;
+	return CardTray[cardIndex];
 }
 
 //offering initial 2 cards
@@ -204,11 +193,11 @@ void offerCards(void) {
 void printCardInitialStatus(void) {
 	int i,j,k;
 	
-	printf("------server: ? , ");
+	printf("------server: ? , \n");
 	printCard(cardhold[n_user][1]);
 
 	
-	printf("      -> you: ");
+	printf("      -> you: \n");
 	for(i=0;i<2;i++);
 	{
 		printCard(cardhold[0][i]);
@@ -216,7 +205,7 @@ void printCardInitialStatus(void) {
 	
 	for(j=1;j<n_user;j++)
 	{
-		printf("      -> player %d: ");
+		printf("      -> player %d: \n");
 		for(k=0;k<2;k++)
 		{
 			printCard(cardhold[j][k]);
