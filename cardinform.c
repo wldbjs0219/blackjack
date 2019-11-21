@@ -1,23 +1,17 @@
 #include <stdio.h> 
 #include <stdlib.h>
 
-//calculate the actual card number in the blackjack game
-int getCardNum(int cardnum) {             				 //cardnum=input a number on a card 
-	
-	int calnumber; 								 		//the number for calculation(ex. heart j=10)
-	
-	if(cardnum >=2 && cardnum<=10 || cardnum >=15 && cardnum<=23 || cardnum >=28 && cardnum<=36 || cardnum >=41 && cardnum<=49)
-	{
-		calnumber=cardnum % 13;
-	}
-	
-	else if(cardnum>=11 && cardnum<=13 || cardnum>=24 && cardnum<=26 || cardnum>=37 && cardnum<=39 || cardnum>=50 && cardnum< =52 )
-	{
-		calnumber=10;
-	}
+#define N_CARDSET			1
+#define N_CARD				52
+#define N_DOLLAR			50
 
-	return calnumber;
-}
+#define N_MAX_CARDNUM		13
+#define N_MAX_USER			5
+#define N_MAX_CARDHOLD		10
+#define N_MAX_GO			17
+#define N_MAX_BET			5
+
+#define N_MIN_ENDCARD		30
 
 //print the card information (e.g. DiaA)
 void printCard(int cardnum) {
@@ -115,4 +109,23 @@ void printCard(int cardnum) {
 		}
 	}
 }
+
+//calculate the actual card number in the blackjack game
+int getCardNum(int cardnum) {             				 //cardnum=input a number on a card 
+	
+	int calnumber; 								 		//the number for calculation(ex. heart j=10)
+	
+	if(cardnum >=2 && cardnum<=10 || cardnum >=15 && cardnum<=23 || cardnum >=28 && cardnum<=36 || cardnum >=41 && cardnum<=49)
+	{
+		calnumber=cardnum % 13;
+	}
+	
+	else if(cardnum>=11 && cardnum<=13 || cardnum>=24 && cardnum<=26 || cardnum>=37 && cardnum<=39 || cardnum>=50 && cardnum<=52 )
+	{
+		calnumber=10;
+	}
+
+	return calnumber;
+}
+
 

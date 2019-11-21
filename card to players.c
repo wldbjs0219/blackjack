@@ -1,40 +1,66 @@
 #include <stdio.h> 
 #include <stdlib.h>
 #include <time.h>
-#include "function.h"
+#include "cardinform.c"
 
 #define N_CARDSET			1
 #define N_CARD				52
 #define N_DOLLAR			50
+
+#define N_MAX_CARDNUM		13
 #define N_MAX_USER			5
 #define N_MAX_CARDHOLD		10
+#define N_MAX_GO			17
+#define N_MAX_BET			5
+
+#define N_MIN_ENDCARD		30
 
 //card tray object
 extern int CardTray[N_CARDSET*N_CARD];
-extern int cardIndex = 0;						
+extern int cardIndex;						
 					
 extern int n_user;  // number of players
 
 //play yard information
 extern int cardhold[N_MAX_USER+1][N_MAX_CARDHOLD];		//cards that currently the players hold 
-
-extern int cardcnt[N_MAX_USER]={2,2,2,2,2};
+extern  int cardcnt[N_MAX_USER];
 
 
 //card array controllers -------------------------------
 
 //mix the card sets and put in the array
-int mixCardTray(void) {
+void swap(int a, int b)
+{
 	int i;
-	
-	srand((unsigned)time(NULL));
-	
-	for(i=0;i<52;i++)
+	int suffle=52;             						// trial of suffle
+	int randNum1,randNum2;
+	int temp;        
+
+	for(i=0; i<suffle; i++) 
 	{
-	 	CardTray[i]=rand()%52 +1;
+		randNum1 = 1+rand()%52; 
+		randNum2 = 1+rand()%52;
+		
+		temp = CardTray[randNum1];
+		CardTray[randNum1] = CardTray[randNum2];
+		CardTray[randNum2] = temp;
+	}
+}
+
+void mixCardTray(void) {
+	
+	int order;    									//card order number in cardtray 
+	int i,j;   
+
+	for(order=0; order<N_CARDSET*N_CARD; order++) 	//CardTray initialization
+	{    
+		CardTray[order]=(order+1);
 	}
 	
+	swap(i,j);
 }
+
+//get card
 
 //get one card from the tray
 int pullCard(void) {
@@ -54,10 +80,11 @@ void offerCards(void) {
 	}
 	//2. give two card for the operator
 	cardhold[n_user][0] = pullCard();
-	cardhold[n_user][1] = pullCard();
-	
+	cardhold[n_user][1] = pullCard();	
 }
 
+//print card of each player and dealer
+//initialcard
 void printCardInitialStatus(void) {
 	int i,j,k;
 	
@@ -81,13 +108,15 @@ void printCardInitialStatus(void) {
 		}	
 	}
 }
-
+// now cardstatus
 void printUserCardStatus(int user) {    			
 	int i;
 	
 	printf("   -> card : ");
 	for (i=0;i<cardcnt[user];i++)
+	{
 		printCard(cardhold[user][i]);
+	}
 	printf("\t ::: ");
 }
 

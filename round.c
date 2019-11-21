@@ -1,6 +1,8 @@
 #include <stdio.h> 
 #include <stdlib.h>
 #include <time.h>
+#include "card to players.c"
+
 #define N_CARDSET			1
 #define N_CARD				52
 #define N_DOLLAR			50
@@ -14,9 +16,13 @@
 
 #define N_MIN_ENDCARD		30
 
-extern int bet[N_MAX_USER];
 extern int dollar[N_MAX_USER];
+extern int bet[N_MAX_USER];
 extern int n_user;
+
+extern int cardhold[N_MAX_USER+1][N_MAX_CARDHOLD];
+extern int cardcnt[N_MAX_USER];
+extern int cardSum[N_MAX_USER];
 
 //betting
 void bet_dollar(void)
@@ -30,9 +36,23 @@ void bet_dollar(void)
 		
 	for(i=1;i<n_user;i++);
 	{
-		bet[i]=1+rand()%dollar[i]
+		bet[i]=1+rand()%dollar[i];
 		printf("player[%d]: %d",i,bet[i]);
 	}
+}
+
+//get an integer input from standard input (keyboard)
+//return : input integer value
+//         (-1 is returned if keyboard input was not integer)
+int getIntegerInput(void) {
+    int input, num;
+    
+    num = scanf("%d", &input);
+    fflush(stdin);
+    if (num != 1) 								//if it fails to get integer
+        input = -1;
+
+    return input;
 }
 
 int getAction(int user)
