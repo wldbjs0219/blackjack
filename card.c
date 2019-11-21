@@ -169,8 +169,7 @@ void mixCardTray(void) {
 //get one card from the tray
 int pullCard(void) {
 
-	cardIndex++;
-	return CardTray[cardIndex];
+	return CardTray[cardIndex ++];
 }
 
 //offering initial 2 cards
@@ -181,7 +180,6 @@ void offerCards(void) {
 	{
 		cardhold[i][0] = pullCard();
 		cardhold[i][1] = pullCard();
-		
 	}
 	//2. give two card for the operator
 	cardhold[n_user][0] = pullCard();
